@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "startSync": "node sync_method/index.js",
+    "startAsync": "node async_method/index.js",
     "devSync": "nodemon sync_method/index.js",
+    "devAsync": "nodemon async_method/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

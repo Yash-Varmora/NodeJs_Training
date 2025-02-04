@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 const http = require('http');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
@@ -11,18 +11,36 @@ const sendResponse = (res, statusCode, message, data = null) => {
     return res.end(JSON.stringify(response));
 };
 
-const readData = () => {
-    if (!fs.existsSync(DATA_FILE)) return [];
-    const data = fs.readFileSync(DATA_FILE, 'utf-8');
-    return data ? JSON.parse(data) : [];
+const readData = async () => {
+    try {
+        if (!(await fileExists(DATA_FILE))) return [];
+        const data = await fs.readFile(DATA_FILE, 'utf-8');
+        return data ? JSON.parse(data) : [];
+    } catch (err) {
+        console.error('Error reading data:', err);
+        return [];
+    }
 };
 
-const writeData = (data) => {
-    fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
+const writeData = async (data) => {
+    try {
+        await fs.writeFile(DATA_FILE, JSON.stringify(data, null, 2));
+    } catch (err) {
+        console.error('Error writing data:', err);
+    }
 };
 
-const server = http.createServer((req, res) => {
-    let books = readData();
+const fileExists = async (filePath) => {
+    try {
+        await fs.access(filePath);
+        return true;
+    } catch (err) {
+        return false;
+    }
+};
+
+const server = http.createServer(async (req, res) => {
+    let books = await readData();
 
     if (req.method === 'GET' && req.url === '/books') {
         return sendResponse(res, 200, 'Books retrieved successfully', books);
@@ -31,24 +49,24 @@ const server = http.createServer((req, res) => {
     if (req.method === 'POST' && req.url === '/books') {
         let body = '';
         req.on('data', chunk => { body += chunk; });
-        req.on('end', () => {
+        req.on('end', async () => {
             const { title, author, description } = JSON.parse(body);
             if (!title || !author || !description) {
                 return sendResponse(res, 400, 'Title, author, and description are required');
             }
             const newBook = { id: uuidv4(), title, author, description };
             books.push(newBook);
-            writeData(books);
+            await writeData(books);
             return sendResponse(res, 201, 'Book created successfully', newBook);
         });
-        return; 
+        return;
     }
 
     if (req.method === 'PUT' && req.url.startsWith('/books/')) {
         const id = req.url.split('/')[2];
         let body = '';
         req.on('data', chunk => { body += chunk; });
-        req.on('end', () => {
+        req.on('end', async () => {
             const { title, author, description } = JSON.parse(body);
             let book = books.find(b => b.id === id);
             if (!book) {
@@ -57,33 +75,33 @@ const server = http.createServer((req, res) => {
             book.title = title || book.title;
             book.author = author || book.author;
             book.description = description || book.description;
-            writeData(books);
+            await writeData(books);
             return sendResponse(res, 200, 'Book updated successfully', book);
         });
-        return; 
+        return;
     }
 
     if (req.method === 'PATCH' && req.url.startsWith('/books/')) {
         const id = req.url.split('/')[2];
         let body = '';
         req.on('data', chunk => { body += chunk; });
-        req.on('end', () => {
+        req.on('end', async () => {
             const updates = JSON.parse(body);
             let bookIndex = books.findIndex(b => b.id === id);
             if (bookIndex === -1) {
                 return sendResponse(res, 404, 'Book not found');
             }
             books[bookIndex] = { ...books[bookIndex], ...updates };
-            writeData(books);
+            await writeData(books);
             return sendResponse(res, 200, 'Book updated successfully', books[bookIndex]);
         });
-        return; 
+        return;
     }
 
     if (req.method === 'DELETE' && req.url.startsWith('/books/')) {
         const id = req.url.split('/')[2];
         books = books.filter(b => b.id !== id);
-        writeData(books);
+        await writeData(books);
         return sendResponse(res, 200, 'Book deleted successfully');
     }
 
