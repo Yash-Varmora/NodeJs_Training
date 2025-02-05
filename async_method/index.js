@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 const http = require('http');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
