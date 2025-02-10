@@ -117,36 +117,6 @@ const j = 10
 console.log(j)
 console.log("=====================================")
 
-// Example of let scope:
-console.log("Example of let scope:")
-let k = 5
-if (true) {
-    let k = 10
-    console.log("Inside block: ", k) // 10
-}
-console.log("Outside block: ", k) // 5
-console.log("=====================================")
-
-// Example of var scope:
-console.log("Example of var scope:")
-var l = 5
-if (true) {
-    var l = 10
-    console.log("Inside block: ", l) // 10
-}
-console.log("Outside block: ", l) // 10
-console.log("=====================================")
-
-// Example of const scope:
-console.log("Example of const scope:")
-const m = 5
-if (true) {
-    const m = 10
-    console.log("Inside block: ", m) // 10
-}
-console.log("Outside block: ", m) // 5
-console.log("=====================================")
-
 // Example of let scope in function:
 console.log("Example of let scope in function:")
 function letScope() {
@@ -227,48 +197,3 @@ console.log("=====================================")
 // }
 // console.log(v)
 // console.log("=====================================")
-
-// Example of let scope in if:
-console.log("Example of let scope in if:")
-if (true) {
-    let w = 5
-    console.log("Inside if: ", w) // 5
-}
-// console.log(w) // ReferenceError: w is not defined
-console.log("=====================================")
-
-// Example of var scope in if:
-console.log("Example of var scope in if:")
-if (true) {
-    var ab = 5
-    console.log("Inside if: ", ab) // 5
-}
-console.log("Outside if: ", ab) // 5
-console.log("=====================================")
-
-// Example of const scope in if:
-console.log("Example of const scope in if:")
-if (true) {
-    const y = 5
-    console.log("Inside if: ", y) // 5
-}
-// console.log(y) // ReferenceError: y is not defined
-console.log("=====================================")
-
-// Restriction example of let:
-let bb = 5
-// let bb = 10 // SyntaxError: Identifier 'bb' has already been declared
-console.log(bb)
-console.log("=====================================")
-
-// Restriction example of var:
-var aa = 5
-var aa = 10
-console.log(aa) // 10
-console.log("=====================================")
-
-// Restriction example of const:
-const ac = 5
-// const ac = 10 // SyntaxError: Identifier 'ac' has already been declared
-console.log(ac)
-console.log("=====================================")
