@@ -1,0 +1,48 @@
+<!--
+Task 17 - “this” with event handlers
+Create an HTML button with the id "myButton" and an associated JavaScript function.
+Inside the function, use both a normal function and an arrow function to handle the button click event.
+Inside each function, use the "this" keyword to log the text content of the button.
+Add the event listeners to the button to trigger both functions.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport"
+       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ <title>Document</title>
+</head>
+<body>
+<button id="myButton">Click</button>
+
+<script>
+ // Normal function
+ function handleClickNormal(){
+  console.log("Normal function: ",this.textContent); // Normal function:  Click
+ }
+
+ // Arrow function
+ const handleClickArrow = () => {
+  console.log("Arrow function: ",this.textContent); // Arrow function:  undefined
+ }
+
+ const button = document.getElementById('myButton');
+ button.addEventListener('click', handleClickNormal);
+ button.addEventListener('click', handleClickArrow);
+</script>
+</body>
+</html>
+
+<!--
+Normal Function:
+       In a normal function, this refers to the object that called the function.
+       When used as an event handler, this refers to the element that received the event (in this case, the button).
+
+Arrow Function:
+      Arrow functions do not have their own this context.
+      Instead, they inherit this from the parent scope at the time they are defined.
+      In the context of an event handler, this means that this does not refer to the element that received the event, but rather to the this value of the enclosing lexical context (which is likely the global object or undefined in strict mode).
+-->

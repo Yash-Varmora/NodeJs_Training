@@ -22,7 +22,7 @@ while (i < arr.length) {
     console.log("=====================================")
 }
 
-// while (true){
+// while (i < arr.length){
 //     if (arr[i].length > 8) {
 //         console.log(`${arr[i]} is greater than 8 characters`)
 //         break

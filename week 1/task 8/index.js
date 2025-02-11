@@ -37,7 +37,6 @@ console.log(user) // Output: { name: "ram", age: 22 }
 
 /**
  * 3. Use var for function-scoped variables:
- *    - Scoped within the function where declared.
  *    - Hoisted to the top of the function, which may cause unexpected behavior.
  *    - Useful for backward compatibility with older JavaScript versions.
  *    - Avoid using for block-scoped variables to prevent scoping issues.

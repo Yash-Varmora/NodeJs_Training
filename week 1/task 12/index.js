@@ -10,6 +10,6 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const evenNumbers = numbers.filter((num) => num % 2 === 0); // filter() method creates a new array with all elements that pass the test implemented by the provided function.
 
 // Printing the original and filtered arrays
-console.log("Original Array:", numbers); // Output: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+console.log("Original Array:", numbers); // Original Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-console.log("Filtered Array (Even Numbers):", evenNumbers); // Output: [2, 4, 6, 8, 10]
+console.log("Filtered Array (Even Numbers):", evenNumbers); // Filtered Array (Even Numbers): [ 2, 4, 6, 8, 10 ]
