@@ -1,0 +1,42 @@
+<!-- Task 9 - Retrieving and Displaying API Data(then…catch)
+Create a program that makes an API call and displays all the retrieved data on a web page. 
+Choose a public API (e.g., JSONPlaceholder, OpenWeatherMap) and use the fetch function to make the API request. 
+Also implement error handling -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>User List</h1>
+    <ul id="user-list" class="user-list"></ul>
+    <p id="error-message"></p>
+    <script>
+      fetch("https://jsonplaceholder.typicode.com/users")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to fetch data");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          const userList = document.getElementById("user-list");
+          document.getElementById("error-message").textContent = "";
+          data.forEach((user) => {
+            const listItem = document.createElement("li");
+            listItem.classList.add("user-item");
+            listItem.textContent = `${user.name} (${user.email})`;
+            userList.appendChild(listItem);
+          });
+        })
+        .catch((error) => {
+          document.getElementById(
+            "error-message"
+          ).textContent = `Error: ${error.message}`;
+        });
+    </script>
+  </body>
+</html>

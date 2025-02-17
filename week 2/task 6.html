@@ -1,0 +1,35 @@
+<!-- Task 6 - setInterval Practical
+Create a static website that contains a start and stop button. 
+Upon clicking the start button, something should be printed every 1 second. 
+Clicking the stop button should halt this process using setInterval. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="startBtn">Start</button>
+    <button id="stopBtn">Stop</button>
+    <div id="output"></div>
+    <script>
+        let intervalId;
+
+        document.getElementById("startBtn").addEventListener("click", function() {
+            if (!intervalId) {
+                intervalId = setInterval(() => {
+                    document.getElementById("output").innerText += "Hello!";
+                }, 1000);
+            }
+        });
+
+        document.getElementById("stopBtn").addEventListener("click", function() {
+            clearInterval(intervalId);
+            intervalId = null;
+            document.getElementById("output").innerText += "Stopped!";
+        });
+    </script>
+</body>
+</html>
