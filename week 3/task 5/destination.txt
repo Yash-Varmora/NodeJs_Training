@@ -1,0 +1,25 @@
+# Buffer:
+
+- A Buffer in nodejs is a temporary storage of binary data. it useful when dealing with file handling, network packets, and streams.
+
+- Advantage
+    - Handle raw binary data.
+    - provide efficient memory usage.
+    - Allow manipulation of binary data before converting it to a string.
+
+# Stream:
+
+- A stream is data handling method that allow reading or writing data in chunks rather than loading the entire file into memory.
+
+- Advantage
+    - Efficient for large files.
+    - reduce memory consumption.
+    - Increases performance by processing data as it arrives.
+
+# Reading files using fs modules:
+
+- Synchronous: fs.readFileSync - Block execution until the operation completes.
+
+- Asynchronous: fs.readFile - Non-blocking, uses callbacks.
+
+- Using Streams: fs.createReadStream - Read files in chunks

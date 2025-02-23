@@ -1,0 +1,21 @@
+{
+  "name": "task-3",
+  "version": "1.0.0",
+  "description": "- HTTP (Hypertext Transfer Protocol): A protocol for transferring data over the web. It is not secure, meaning data is transferred in plaintext.\r - HTTPS (Hypertext Transfer Protocol Secure): A secure version of HTTP that uses SSL/TLS encryption to protect data, ensuring privacy and integrity.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  },
+  "dependencies": {
+    "uuid": "^11.0.5"
+  }
+}
